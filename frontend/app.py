@@ -480,13 +480,31 @@ section[data-testid="stSidebar"]::-webkit-scrollbar-thumb {
     box-sizing: border-box !important;
     
 }
+                
+            
+/* ───────── TRUE CENTER SIDEBAR NAV ───────── */
 
-/* Only apply spacing between REAL items */
-[data-testid="stSidebar"] .stRadio div[role="radiogroup"] {
+/* Center the whole group */
+[data-testid="stSidebar"] div[role="radiogroup"] {
     display: flex;
     flex-direction: column;
-    gap: 8px;
-    
+    align-items: center !important;
+    gap: 10px;
+    border-left: 15px solid transparent; /* for consistent width */
+}
+
+/* 🔥 KEY FIX: shrink label width */
+[data-testid="stSidebar"] div[role="radiogroup"] label {
+    display: inline-flex !important;   /* not full width anymore */
+    justify-content: center !important;
+    align-items: center !important;
+
+    width: fit-content !important;     /* 🔥 THIS fixes it */
+    min-width: 220px;                  /* optional: uniform size */
+
+    text-align: left !important;
+    padding: 10px 16px !important;
+    border-radius: 10px;
 }
 
 /* Hover */
@@ -766,6 +784,8 @@ html, body, .stApp {
     width: 100%;
     text-align: center;
 }
+
+
 
 </style>
 """, unsafe_allow_html=True)
