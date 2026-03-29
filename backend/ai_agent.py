@@ -50,8 +50,8 @@ Guidelines:
 - Highlight anything important the user might miss
 - Avoid repeating raw data
 - Keep response concise and readable
-- Do NOT mention exact numeric values (risk scores, delays, percentages)
-- Do NOT infer or guess numbers from the dataset
+- Do NOT mention exact numeric values
+- Do NOT guess or infer numbers from the dataset
 
 Tone:
 - Professional and analytical
@@ -59,7 +59,7 @@ Tone:
 """
 
         response = client.models.generate_content(
-            model="gemini-3-flash-preview",
+            model="gemini-2.5-flash",
             contents=prompt
         )
 
@@ -123,7 +123,7 @@ Tone:
 """
 
         response = client.models.generate_content(
-            model="gemini-3-flash-preview",
+            model="gemini-2.5-flash",
             contents=prompt
         )
 
