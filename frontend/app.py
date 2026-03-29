@@ -9,6 +9,7 @@ load_dotenv()
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
+from plotly import colors
 import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -785,7 +786,37 @@ html, body, .stApp {
     text-align: center;
 }
 
+/* Remove inner divider (the vertical bar) */
+div[data-baseweb="select"] span {
+    display: none !important;
+}
 
+/* Remove caret completely */
+div[data-baseweb="select"] input {
+    caret-color: transparent !important;
+}
+
+/* Clean borders */
+div[data-baseweb="select"] > div {
+    border: 1px solid #E6EAF2 !important;
+    box-shadow: none !important;
+}
+
+/* Optional: remove focus glow */
+div[data-baseweb="select"]:focus-within {
+    box-shadow: none !important;
+}
+            
+/* Kill any vertical divider inside select */
+div[data-baseweb="select"] * {
+    border-right: none !important;
+}
+
+/* Hide any thin separator */
+div[data-baseweb="select"] span,
+div[data-baseweb="select"] svg {
+    display: none !important;
+}
 
 </style>
 """, unsafe_allow_html=True)
@@ -1471,6 +1502,8 @@ elif "⚠️" in page:
     medium_risk = df[(df["risk_score"] > 5) & (df["risk_score"] <= 8)]
     low_risk = df[df["risk_score"] <= 5]
 
+    top_risk = high_risk.sort_values("risk_score", ascending=False).head(10)
+
     # -------------------------------
     # KPIs
     # -------------------------------
@@ -1573,6 +1606,46 @@ elif "⚠️" in page:
         )
 
     st.plotly_chart(fig, use_container_width=True)
+
+    # ================================
+    # 🧠 SUPPLIER DUE DILIGENCE AGENT
+    # ================================
+    from backend.due_diligence_agent import run_due_diligence
+
+    st.markdown("### 🧠 Supplier Due Diligence Agent")
+
+    supplier_list = top_risk["supplier_name"].unique()
+
+    selected_supplier = st.selectbox(
+    "🔍 Search supplier",
+    supplier_list,
+    index=None,
+    placeholder="Start typing supplier name..."
+    )
+
+    if st.button("Run Due Diligence"):
+
+        with st.spinner("Running AI evaluation..."):
+
+            result = run_due_diligence(
+                selected_supplier,
+                performance,
+                esg,
+                suppliers
+            )
+
+        st.markdown(f"##### {result['supplier']}")
+
+        st.write(f"**Operational Risk:** {result['op_risk']}")
+        st.write(f"**ESG Risk:** {result['esg_risk']}")
+        st.write(f"**Overall Risk:** {result['overall']}")
+
+        st.markdown("**⚠️ Key Issues**")
+        for i in result["issues"]:
+            st.write(f"- {i}")
+
+        st.markdown("**💡 Recommendation**")
+        st.write(result["ai_summary"])
 
 
 ############################################################
