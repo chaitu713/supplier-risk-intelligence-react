@@ -20,10 +20,10 @@ export function OverviewDashboardPage() {
   const metrics = metricsQuery.data;
 
   return (
-    <div className="min-h-screen bg-slate-50">
+    <div className="min-h-screen">
       <div className="mx-auto flex w-full max-w-7xl flex-col gap-8 px-6 py-10 lg:px-8">
-        <header className="rounded-[2rem] border border-slate-200 bg-white px-8 py-8 shadow-sm">
-          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-indigo-700">
+        <header className="rounded-[2rem] border border-blue-100 bg-white/95 px-8 py-8 shadow-[0_20px_60px_rgba(37,99,235,0.08)]">
+          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-blue-700">
             Overview Dashboard
           </p>
           <h1 className="mt-3 text-3xl font-semibold tracking-tight text-slate-950 sm:text-4xl">
@@ -52,25 +52,25 @@ export function OverviewDashboardPage() {
             label="Avg ESG Score"
             value={metrics ? metrics.avgEsgScore.toFixed(1) : "-"}
             subtitle="Environmental and social"
-            accentClassName="bg-emerald-600"
+            accentClassName="bg-sky-500"
           />
           <KpiCard
             label="Avg Delay"
             value={metrics ? `${metrics.avgDelayDays.toFixed(1)}d` : "-"}
             subtitle="Delivery performance"
-            accentClassName="bg-amber-500"
+            accentClassName="bg-blue-500"
           />
           <KpiCard
             label="Avg Defect Rate"
             value={metrics ? `${metrics.avgDefectRatePct.toFixed(2)}%` : "-"}
             subtitle="Quality metric"
-            accentClassName="bg-cyan-600"
+            accentClassName="bg-indigo-500"
           />
           <KpiCard
             label="High Risk"
             value={metrics ? metrics.highRiskCount.toLocaleString() : "-"}
             subtitle="Require attention"
-            accentClassName="bg-rose-600"
+            accentClassName="bg-blue-800"
           />
         </section>
 

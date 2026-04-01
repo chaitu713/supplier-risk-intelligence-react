@@ -1,9 +1,9 @@
 import type { IngestionJob, IngestionStep } from "../../../api/documents";
 
 const stepStyles: Record<IngestionStep["status"], string> = {
-  pending: "bg-slate-100 text-slate-500 border-slate-200",
+  pending: "bg-blue-50/50 text-slate-500 border-blue-100",
   processing: "bg-blue-50 text-blue-700 border-blue-200",
-  completed: "bg-emerald-50 text-emerald-700 border-emerald-200",
+  completed: "bg-blue-100 text-blue-800 border-blue-200",
   failed: "bg-rose-50 text-rose-700 border-rose-200",
 };
 
@@ -18,7 +18,7 @@ export function ProcessingTimeline({
 }: ProcessingTimelineProps) {
   if (isLoading) {
     return (
-      <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
+      <div className="rounded-[2rem] border border-blue-100 bg-white/95 p-6 shadow-[0_16px_48px_rgba(37,99,235,0.08)]">
         <div className="h-5 w-40 animate-pulse rounded bg-slate-200" />
         <div className="mt-6 space-y-3">
           {Array.from({ length: 5 }).map((_, index) => (
@@ -30,7 +30,7 @@ export function ProcessingTimeline({
   }
 
   return (
-    <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
+    <section className="rounded-[2rem] border border-blue-100 bg-white/95 p-6 shadow-[0_16px_48px_rgba(37,99,235,0.08)]">
       <div className="flex items-start justify-between gap-4">
         <div>
           <h3 className="text-lg font-semibold text-slate-900">Processing Timeline</h3>
@@ -38,7 +38,7 @@ export function ProcessingTimeline({
             Live ingestion status across upload, extraction, parsing, and persistence.
           </p>
         </div>
-        <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-medium uppercase tracking-wide text-slate-700">
+        <span className="rounded-full bg-blue-50 px-3 py-1 text-xs font-medium uppercase tracking-wide text-blue-700 ring-1 ring-blue-100">
           {job?.status ?? "idle"}
         </span>
       </div>
@@ -63,7 +63,7 @@ export function ProcessingTimeline({
           ))}
         </ol>
       ) : (
-        <div className="mt-6 rounded-2xl border border-dashed border-slate-200 bg-slate-50 p-6 text-sm text-slate-500">
+        <div className="mt-6 rounded-2xl border border-dashed border-blue-200 bg-blue-50/50 p-6 text-sm text-slate-500">
           Start an ingestion job to see the live pipeline timeline here.
         </div>
       )}

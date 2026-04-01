@@ -9,7 +9,7 @@ export function DatasetTable({ records, isLoading }: DatasetTableProps) {
   const columns = records[0] ? Object.keys(records[0]) : [];
 
   return (
-    <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
+    <section className="rounded-[2rem] border border-blue-100 bg-white/95 p-6 shadow-[0_16px_48px_rgba(37,99,235,0.08)]">
       <div className="mb-5">
         <h3 className="text-lg font-semibold text-slate-900">Dataset Preview</h3>
         <p className="mt-1 text-sm text-slate-500">
@@ -19,8 +19,8 @@ export function DatasetTable({ records, isLoading }: DatasetTableProps) {
       </div>
 
       <div className="overflow-x-auto">
-        <table className="min-w-full divide-y divide-slate-200 text-left">
-          <thead className="bg-slate-50">
+        <table className="min-w-full divide-y divide-blue-100 text-left">
+          <thead className="bg-blue-50/70">
             <tr>
               {columns.map((column) => (
                 <th
@@ -43,7 +43,7 @@ export function DatasetTable({ records, isLoading }: DatasetTableProps) {
               ))
             ) : records.length > 0 ? (
               records.map((record, rowIndex) => (
-                <tr key={rowIndex} className="hover:bg-slate-50">
+                <tr key={rowIndex} className="hover:bg-blue-50/50">
                   {Object.entries(record).map(([column, value]) => (
                     <td
                       key={`${rowIndex}-${column}`}

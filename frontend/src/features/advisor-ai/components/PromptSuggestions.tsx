@@ -10,13 +10,13 @@ interface PromptSuggestionsProps {
 
 export function PromptSuggestions({ onSelect }: PromptSuggestionsProps) {
   return (
-    <div className="flex flex-wrap gap-2">
+    <div className="flex flex-col gap-3">
       {suggestions.map((prompt) => (
         <button
           key={prompt}
           type="button"
           onClick={() => onSelect(prompt)}
-          className="rounded-full border border-slate-200 bg-slate-100 px-4 py-2 text-sm font-medium text-slate-600 transition hover:border-blue-200 hover:bg-blue-50 hover:text-blue-700"
+          className="rounded-2xl border border-blue-100 bg-white px-4 py-4 text-left text-sm font-medium text-slate-700 shadow-sm transition hover:border-blue-200 hover:bg-blue-50 hover:text-blue-800"
         >
           {prompt}
         </button>

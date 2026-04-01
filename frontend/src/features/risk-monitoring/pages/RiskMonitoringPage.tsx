@@ -30,10 +30,10 @@ export function RiskMonitoringPage() {
   const overview = overviewQuery.data;
 
   return (
-    <div className="min-h-screen bg-slate-50">
+    <div className="min-h-screen">
       <div className="mx-auto flex w-full max-w-7xl flex-col gap-8 px-6 py-10 lg:px-8">
-        <header className="rounded-[2rem] border border-slate-200 bg-white px-8 py-8 shadow-sm">
-          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-rose-700">
+        <header className="rounded-[2rem] border border-blue-100/80 bg-white/95 px-8 py-8 shadow-[0_20px_60px_rgba(37,99,235,0.08)]">
+          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-blue-700">
             Risk Monitoring
           </p>
           <h1 className="mt-3 text-3xl font-semibold tracking-tight text-slate-950 sm:text-4xl">
@@ -56,13 +56,13 @@ export function RiskMonitoringPage() {
             label="High Risk"
             value={overview ? overview.highRiskCount.toLocaleString() : "-"}
             subtitle="Score > 8"
-            accentClassName="bg-rose-600"
+            accentClassName="bg-amber-500"
           />
           <KpiCard
             label="Medium Risk"
             value={overview ? overview.mediumRiskCount.toLocaleString() : "-"}
             subtitle="Score 5-8"
-            accentClassName="bg-amber-500"
+            accentClassName="bg-yellow-400"
           />
           <KpiCard
             label="Low Risk"
@@ -74,7 +74,7 @@ export function RiskMonitoringPage() {
             label="Avg Risk Score"
             value={overview ? overview.avgRiskScore.toFixed(2) : "-"}
             subtitle="Fleet average"
-            accentClassName="bg-cyan-600"
+            accentClassName="bg-blue-700"
           />
         </section>
 

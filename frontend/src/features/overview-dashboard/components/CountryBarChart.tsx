@@ -1,4 +1,5 @@
 import type { CountryDistributionItem } from "../../../api/analytics";
+import { PlotlyChart } from "../../../components/common/PlotlyChart";
 
 interface CountryBarChartProps {
   items: CountryDistributionItem[];
@@ -6,10 +7,8 @@ interface CountryBarChartProps {
 }
 
 export function CountryBarChart({ items, isLoading }: CountryBarChartProps) {
-  const maxValue = Math.max(...items.map((item) => item.supplierCount), 1);
-
   return (
-    <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
+    <section className="rounded-[2rem] border border-blue-100 bg-white/95 p-6 shadow-[0_16px_48px_rgba(37,99,235,0.08)]">
       <div className="mb-6">
         <h3 className="text-lg font-semibold text-slate-900">Suppliers by Country</h3>
         <p className="mt-1 text-sm text-slate-500">
@@ -23,23 +22,38 @@ export function CountryBarChart({ items, isLoading }: CountryBarChartProps) {
             <div key={index} className="h-10 animate-pulse rounded-2xl bg-slate-100" />
           ))}
         </div>
-      ) : (
-        <div className="space-y-4">
-          {items.map((item) => (
-            <div key={item.country}>
-              <div className="mb-2 flex items-center justify-between text-sm">
-                <span className="font-medium text-slate-700">{item.country}</span>
-                <span className="text-slate-500">{item.supplierCount}</span>
-              </div>
-              <div className="h-3 rounded-full bg-slate-100">
-                <div
-                  className="h-3 rounded-full bg-blue-700"
-                  style={{ width: `${(item.supplierCount / maxValue) * 100}%` }}
-                />
-              </div>
-            </div>
-          ))}
+      ) : items.length === 0 ? (
+        <div className="rounded-[1.5rem] border border-dashed border-blue-200 bg-blue-50/50 px-6 py-16 text-center text-sm text-slate-500">
+          No country distribution data available yet.
         </div>
+      ) : (
+        <PlotlyChart
+          className="h-[340px]"
+          data={[
+            {
+              type: "bar",
+              orientation: "h",
+              y: items.map((item) => item.country).reverse(),
+              x: items.map((item) => item.supplierCount).reverse(),
+              marker: {
+                color: "#2563eb",
+                line: { color: "#bfdbfe", width: 1 },
+              },
+              hovertemplate: "%{y}: %{x}<extra></extra>",
+            },
+          ]}
+          layout={{
+            margin: { l: 90, r: 24, t: 8, b: 36 },
+            xaxis: {
+              title: { text: "Suppliers" },
+              gridcolor: "#dbeafe",
+              zerolinecolor: "#dbeafe",
+            },
+            yaxis: {
+              automargin: true,
+            },
+          }}
+        />
       )}
     </section>
   );

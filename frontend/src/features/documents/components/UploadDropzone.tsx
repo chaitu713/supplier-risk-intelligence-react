@@ -1,4 +1,5 @@
 import { useId } from "react";
+import { formatFileSize } from "../../../utils/formatting";
 
 interface UploadDropzoneProps {
   label: string;
@@ -19,19 +20,42 @@ export function UploadDropzone({
     <div className="space-y-3">
       <label
         htmlFor={inputId}
-        className="flex min-h-40 cursor-pointer flex-col items-center justify-center rounded-2xl border-2 border-dashed border-slate-300 bg-slate-50 px-4 py-6 text-center transition hover:border-blue-500 hover:bg-blue-50"
+        className="group flex min-h-44 cursor-pointer flex-col justify-between rounded-[1.75rem] border border-blue-100 bg-[linear-gradient(180deg,#fbfdff_0%,#f3f8ff_100%)] px-5 py-5 text-left transition hover:border-blue-300 hover:shadow-sm"
       >
-        <span className="text-sm font-medium text-slate-800">
-          {file ? file.name : label}
-        </span>
-        <span className="mt-2 text-xs text-slate-500">
-          Drag and drop a PDF here, or click to browse
-        </span>
-        {file ? (
-          <span className="mt-3 rounded-full bg-emerald-50 px-3 py-1 text-xs font-medium text-emerald-700">
-            {(file.size / 1024 / 1024).toFixed(2)} MB
+        <div className="flex items-start justify-between gap-4">
+          <div className="rounded-2xl bg-white px-3 py-2 shadow-sm ring-1 ring-blue-100">
+            <span className="text-lg">PDF</span>
+          </div>
+          <span className="rounded-full bg-blue-700 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.16em] text-white">
+            {file ? "Selected" : "Required"}
           </span>
-        ) : null}
+        </div>
+
+        <div className="space-y-2">
+          <span className="block text-base font-semibold text-slate-900">
+            {file ? file.name : label}
+          </span>
+          <span className="block text-sm leading-6 text-slate-500">
+            Drag and drop a PDF here, or use browse to attach the file.
+          </span>
+        </div>
+
+        <div className="flex flex-wrap items-center gap-2">
+          {file ? (
+            <>
+              <span className="rounded-full bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-700 ring-1 ring-emerald-100">
+                {formatFileSize(file.size)}
+              </span>
+              <span className="rounded-full bg-white px-3 py-1 text-xs font-medium text-slate-500 ring-1 ring-blue-100">
+                {file.type || "application/pdf"}
+              </span>
+            </>
+          ) : (
+            <span className="rounded-full bg-white px-3 py-1 text-xs font-medium text-slate-500 ring-1 ring-blue-100 transition group-hover:ring-blue-200">
+              Click to browse
+            </span>
+          )}
+        </div>
       </label>
 
       <input
@@ -46,7 +70,7 @@ export function UploadDropzone({
         <button
           type="button"
           onClick={() => onFileSelect(null)}
-          className="text-xs font-medium text-rose-600 transition hover:text-rose-700"
+          className="inline-flex items-center rounded-full px-1 text-xs font-semibold text-rose-600 transition hover:text-rose-700"
         >
           Remove file
         </button>

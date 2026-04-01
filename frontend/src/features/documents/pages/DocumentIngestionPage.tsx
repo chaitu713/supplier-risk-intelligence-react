@@ -99,9 +99,9 @@ export function DocumentIngestionPage() {
   );
 
   return (
-    <div className="min-h-screen bg-slate-50">
+    <div className="min-h-screen">
       <div className="mx-auto flex w-full max-w-7xl flex-col gap-8 px-6 py-10 lg:px-8">
-        <header className="rounded-[2rem] border border-slate-200 bg-white px-8 py-8 shadow-sm">
+        <header className="rounded-[2rem] border border-blue-100/80 bg-white/95 px-8 py-8 shadow-[0_20px_60px_rgba(37,99,235,0.08)]">
           <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
             <div className="max-w-3xl">
               <p className="text-sm font-semibold uppercase tracking-[0.18em] text-blue-700">
@@ -116,19 +116,19 @@ export function DocumentIngestionPage() {
                 triggers ingestion, and tracks processing history through backend APIs.
               </p>
             </div>
-
-            <button
-              type="button"
-              onClick={() => void handleProcessDocuments()}
-              disabled={!isReadyToProcess || startIngestionMutation.isPending}
-              className="inline-flex items-center justify-center rounded-2xl bg-blue-700 px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-blue-800 disabled:cursor-not-allowed disabled:bg-slate-300"
-            >
-              {startIngestionMutation.isPending ? "Processing..." : "Process Documents"}
-            </button>
+            <div className="rounded-3xl border border-blue-100 bg-blue-50/50 px-5 py-4">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-500">
+                Upload Status
+              </p>
+              <p className="mt-2 text-2xl font-semibold text-slate-950">
+                {Object.values(files).filter(Boolean).length}/3
+              </p>
+              <p className="mt-1 text-sm text-slate-500">Documents selected</p>
+            </div>
           </div>
         </header>
 
-        <section className="grid gap-4 rounded-[2rem] border border-slate-200 bg-white p-6 shadow-sm md:grid-cols-5">
+        <section className="grid gap-4 rounded-[2rem] border border-blue-100/80 bg-white/95 p-6 shadow-[0_14px_40px_rgba(37,99,235,0.08)] md:grid-cols-5">
           {[
             { title: "Upload", subtitle: "Select PDF files" },
             { title: "Store", subtitle: "Upload to blob storage" },
@@ -137,7 +137,7 @@ export function DocumentIngestionPage() {
             { title: "History", subtitle: "Log ingestion results" },
           ].map((step, index) => (
             <div key={step.title} className="flex items-center gap-4">
-              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-blue-50 text-sm font-semibold text-blue-700">
+              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-sky-50 text-sm font-semibold text-sky-700">
                 {index + 1}
               </div>
               <div>
@@ -172,6 +172,33 @@ export function DocumentIngestionPage() {
           ))}
         </section>
 
+        <section className="sticky bottom-4 z-10 rounded-[2rem] border border-blue-100/80 bg-white/95 p-5 shadow-[0_24px_60px_rgba(37,99,235,0.12)] backdrop-blur">
+          <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+            <div>
+              <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-500">
+                Pipeline Control
+              </p>
+              <p className="mt-2 text-base font-semibold text-slate-900">
+                {isReadyToProcess
+                  ? "All required files are attached and ready for processing."
+                  : "Attach supplier, ESG, and transaction PDFs to continue."}
+              </p>
+              <p className="mt-1 text-sm text-slate-500">
+                The existing upload and ingestion behavior is unchanged.
+              </p>
+            </div>
+
+            <button
+              type="button"
+              onClick={() => void handleProcessDocuments()}
+              disabled={!isReadyToProcess || startIngestionMutation.isPending}
+              className="inline-flex min-h-12 items-center justify-center rounded-2xl bg-blue-700 px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-blue-800 disabled:cursor-not-allowed disabled:bg-slate-300"
+            >
+              {startIngestionMutation.isPending ? "Processing..." : "Process Documents"}
+            </button>
+          </div>
+        </section>
+
         <div className="grid gap-6 xl:grid-cols-[1.25fr_0.9fr]">
           <ProcessingTimeline
             job={currentJob}
@@ -181,7 +208,7 @@ export function DocumentIngestionPage() {
           {currentJob?.status === "completed" ? (
             <ProcessingSummaryCard job={currentJob} />
           ) : (
-            <aside className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
+            <aside className="rounded-[2rem] border border-blue-100 bg-white/95 p-6 shadow-[0_16px_48px_rgba(37,99,235,0.08)]">
               <h3 className="text-lg font-semibold text-slate-900">Ready State</h3>
               <p className="mt-1 text-sm text-slate-500">
                 All three documents must be selected before the pipeline can start.
@@ -194,7 +221,7 @@ export function DocumentIngestionPage() {
                   return (
                     <div
                       key={definition.kind}
-                      className="flex items-center justify-between rounded-2xl border border-slate-200 px-4 py-3"
+                      className="flex items-center justify-between rounded-2xl border border-blue-100 px-4 py-3"
                     >
                       <span className="text-sm font-medium text-slate-700">
                         {definition.title}

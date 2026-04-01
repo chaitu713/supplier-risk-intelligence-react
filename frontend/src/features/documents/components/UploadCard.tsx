@@ -16,16 +16,16 @@ export function UploadCard({
   children,
 }: UploadCardProps) {
   return (
-    <section className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
-      <div className="mb-4 flex items-center gap-3">
+    <section className="rounded-[2rem] border border-blue-100/80 bg-white/95 p-5 shadow-[0_14px_40px_rgba(37,99,235,0.08)]">
+      <div className="mb-5 flex items-center gap-3">
         <div
-          className={`flex h-11 w-11 items-center justify-center rounded-2xl text-lg ${tintClassName}`}
+          className={`flex h-12 w-12 items-center justify-center rounded-2xl text-lg shadow-sm ${tintClassName}`}
         >
           {icon}
         </div>
         <div>
-          <h3 className="text-sm font-semibold text-slate-900">{title}</h3>
-          <p className="text-xs text-slate-500">{description}</p>
+          <h3 className="text-base font-semibold text-slate-900">{title}</h3>
+          <p className="mt-1 text-sm text-slate-500">{description}</p>
         </div>
       </div>
       {children}

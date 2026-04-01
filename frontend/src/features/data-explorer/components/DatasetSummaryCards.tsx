@@ -17,7 +17,7 @@ export function DatasetSummaryCards({
 
 function SummaryCard({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
+    <div className="rounded-[2rem] border border-blue-100 bg-white/95 p-6 shadow-[0_16px_48px_rgba(37,99,235,0.08)]">
       <p className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">
         {label}
       </p>

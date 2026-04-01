@@ -15,8 +15,8 @@ const navItems = [
 
 export function AppShell({ children }: AppShellProps) {
   return (
-    <div className="min-h-screen bg-slate-50">
-      <div className="sticky top-0 z-20 border-b border-slate-200 bg-white/95 backdrop-blur lg:hidden">
+    <div className="min-h-screen">
+      <div className="sticky top-0 z-20 border-b border-blue-100/80 bg-white/90 backdrop-blur lg:hidden">
         <div className="mx-auto flex max-w-7xl gap-2 overflow-x-auto px-4 py-3">
           {navItems.map((item) => (
             <NavLink
@@ -26,8 +26,8 @@ export function AppShell({ children }: AppShellProps) {
               className={({ isActive }) =>
                 `whitespace-nowrap rounded-full px-4 py-2 text-sm font-medium transition ${
                   isActive
-                    ? "bg-blue-700 text-white"
-                    : "bg-slate-100 text-slate-600 hover:bg-slate-200"
+                    ? "bg-blue-700 text-white shadow-sm"
+                    : "bg-white text-slate-600 ring-1 ring-blue-100 hover:bg-blue-50/60"
                 }`
               }
             >
@@ -37,16 +37,16 @@ export function AppShell({ children }: AppShellProps) {
         </div>
       </div>
 
-      <aside className="fixed inset-y-0 left-0 hidden w-72 border-r border-slate-200 bg-white px-5 py-6 lg:block">
-        <div className="rounded-3xl bg-gradient-to-br from-blue-700 to-indigo-700 px-5 py-6 text-white shadow-lg">
-          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-blue-100">
+      <aside className="fixed inset-y-0 left-0 hidden w-80 border-r border-blue-100/70 bg-white/88 px-5 py-6 backdrop-blur lg:block">
+        <div className="rounded-[2rem] border border-blue-200/70 bg-[linear-gradient(135deg,#1d4ed8_0%,#2563eb_52%,#38bdf8_100%)] px-5 py-6 text-white shadow-[0_20px_60px_rgba(37,99,235,0.2)]">
+          <p className="text-xs font-semibold uppercase tracking-[0.24em] text-blue-100">
             Supplier Intelligence
           </p>
           <h1 className="mt-3 text-xl font-semibold leading-tight">
-            React Migration Workspace
+            Executive Operations Console
           </h1>
-          <p className="mt-2 text-sm text-blue-100">
-            Streamlit features being migrated one page at a time into a production-ready UI.
+          <p className="mt-2 text-sm leading-6 text-blue-50/90">
+            A cleaner workspace for document intake, supplier risk reviews, and AI-assisted sourcing analysis.
           </p>
         </div>
 
@@ -59,8 +59,8 @@ export function AppShell({ children }: AppShellProps) {
               className={({ isActive }) =>
                 `block rounded-2xl px-4 py-3 text-sm font-medium transition ${
                   isActive
-                    ? "bg-blue-50 text-blue-700"
-                    : "text-slate-600 hover:bg-slate-100 hover:text-slate-900"
+                    ? "bg-blue-700 text-white shadow-sm"
+                    : "text-slate-600 hover:bg-blue-50/60 hover:text-blue-800 hover:shadow-sm"
                 }`
               }
             >
@@ -68,9 +68,18 @@ export function AppShell({ children }: AppShellProps) {
             </NavLink>
           ))}
         </nav>
+
+        <div className="mt-8 rounded-3xl border border-blue-100 bg-white px-4 py-5 shadow-sm">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-500">
+            Workspace Focus
+          </p>
+          <p className="mt-3 text-sm leading-6 text-slate-600">
+            Review uploads, launch due diligence faster, and keep AI responses readable enough for decision-making.
+          </p>
+        </div>
       </aside>
 
-      <main className="lg:pl-72">{children}</main>
+      <main className="lg:pl-80">{children}</main>
     </div>
   );
 }
