@@ -12,15 +12,15 @@ export function KpiCard({
   accentClassName,
 }: KpiCardProps) {
   return (
-    <div className="rounded-[2rem] border border-blue-100 bg-white/95 p-6 shadow-[0_16px_48px_rgba(37,99,235,0.08)]">
+    <div className="surface-card p-6">
       <div className={`h-1.5 w-14 rounded-full ${accentClassName}`} />
-      <p className="mt-5 text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">
+      <p className="mt-5 text-xs font-semibold uppercase tracking-[0.16em] text-[var(--muted)]">
         {label}
       </p>
-      <p className="mt-3 text-3xl font-semibold tracking-tight text-slate-950">
+      <p className="mt-3 text-3xl font-semibold tracking-tight text-[var(--text)]">
         {value}
       </p>
-      <p className="mt-2 text-sm text-slate-500">{subtitle}</p>
+      <p className="mt-2 text-sm text-[var(--muted)]">{subtitle}</p>
     </div>
   );
 }

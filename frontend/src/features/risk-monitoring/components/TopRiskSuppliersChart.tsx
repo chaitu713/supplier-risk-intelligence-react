@@ -15,14 +15,14 @@ export function TopRiskSuppliersChart({
   if (!isLoading) {
     if (items.length === 0) {
       return (
-        <section className="rounded-[2rem] border border-blue-100 bg-white/95 p-6 shadow-[0_16px_48px_rgba(37,99,235,0.08)]">
+        <section className="surface-card p-6">
           <div className="mb-6">
-            <h3 className="text-lg font-semibold text-slate-900">Top 10 High-Risk Suppliers</h3>
-            <p className="mt-1 text-sm text-slate-500">
+            <h3 className="text-lg font-semibold text-[var(--text)]">Top 10 High-Risk Suppliers</h3>
+            <p className="mt-1 text-sm text-[var(--muted)]">
               Highest-risk suppliers ranked by risk score.
             </p>
           </div>
-          <div className="rounded-[1.5rem] border border-dashed border-blue-200 bg-blue-50/50 px-6 py-16 text-center text-sm text-slate-500">
+          <div className="empty-state px-6 py-16 text-center text-sm">
             No top-risk supplier data available yet.
           </div>
         </section>
@@ -30,10 +30,10 @@ export function TopRiskSuppliersChart({
     }
 
     return (
-      <section className="rounded-[2rem] border border-blue-100 bg-white/95 p-6 shadow-[0_16px_48px_rgba(37,99,235,0.08)]">
+      <section className="surface-card p-6">
         <div className="mb-6">
-          <h3 className="text-lg font-semibold text-slate-900">Top 10 High-Risk Suppliers</h3>
-          <p className="mt-1 text-sm text-slate-500">
+          <h3 className="text-lg font-semibold text-[var(--text)]">Top 10 High-Risk Suppliers</h3>
+          <p className="mt-1 text-sm text-[var(--muted)]">
             Highest-risk suppliers ranked by risk score.
           </p>
         </div>
@@ -46,8 +46,8 @@ export function TopRiskSuppliersChart({
               y: items.map((item) => item.supplierName).reverse(),
               x: items.map((item) => item.riskScore).reverse(),
               marker: {
-                color: "#2563eb",
-                line: { color: "#bfdbfe", width: 1 },
+                color: "#166534",
+                line: { color: "#bbf7d0", width: 1 },
               },
               customdata: items
                 .map((item) => [item.country ?? "Unknown", item.category ?? "Unspecified"])
@@ -73,10 +73,10 @@ export function TopRiskSuppliersChart({
   }
 
   return (
-    <section className="rounded-[2rem] border border-blue-100 bg-white/95 p-6 shadow-[0_16px_48px_rgba(37,99,235,0.08)]">
+    <section className="surface-card p-6">
       <div className="mb-6">
-        <h3 className="text-lg font-semibold text-slate-900">Top 10 High-Risk Suppliers</h3>
-        <p className="mt-1 text-sm text-slate-500">
+        <h3 className="text-lg font-semibold text-[var(--text)]">Top 10 High-Risk Suppliers</h3>
+        <p className="mt-1 text-sm text-[var(--muted)]">
           Highest-risk suppliers ranked by risk score.
         </p>
       </div>
@@ -93,18 +93,18 @@ export function TopRiskSuppliersChart({
             <div key={item.supplierId}>
               <div className="mb-2 flex items-center justify-between gap-4">
                 <div>
-                  <p className="text-sm font-medium text-slate-900">{item.supplierName}</p>
-                  <p className="text-xs text-slate-500">
+                  <p className="text-sm font-medium text-[var(--text)]">{item.supplierName}</p>
+                  <p className="text-xs text-[var(--muted)]">
                     {[item.country, item.category].filter(Boolean).join(" • ")}
                   </p>
                 </div>
-                <span className="text-sm font-semibold text-slate-700">
+                <span className="mono text-sm font-semibold text-[var(--text-secondary)]">
                   {item.riskScore.toFixed(2)}
                 </span>
               </div>
-              <div className="h-3 rounded-full bg-blue-50 ring-1 ring-blue-100">
+              <div className="h-3 rounded-full bg-[var(--surface-2)] ring-1 ring-[var(--border)]">
                 <div
-                  className="h-3 rounded-full bg-gradient-to-r from-blue-700 to-sky-500"
+                  className="h-3 rounded-full bg-gradient-to-r from-[var(--primary)] to-[#4ade80]"
                   style={{ width: `${(item.riskScore / maxValue) * 100}%` }}
                 />
               </div>

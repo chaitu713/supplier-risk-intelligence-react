@@ -10,18 +10,18 @@ export function ProcessingHistoryTable({
   isLoading,
 }: ProcessingHistoryTableProps) {
   return (
-    <section className="rounded-[2rem] border border-blue-100 bg-white/95 p-6 shadow-[0_16px_48px_rgba(37,99,235,0.08)]">
+    <section className="surface-card p-6">
       <div className="mb-5">
-        <h3 className="text-lg font-semibold text-slate-900">Processing History</h3>
-        <p className="mt-1 text-sm text-slate-500">
+        <h3 className="text-lg font-semibold text-[var(--text)]">Processing History</h3>
+        <p className="mt-1 text-sm text-[var(--muted)]">
           Recent document ingestion activity from the backend.
         </p>
       </div>
 
       <div className="overflow-x-auto">
-        <table className="min-w-full divide-y divide-blue-100 text-left">
+        <table className="data-table min-w-full text-left">
           <thead>
-            <tr className="text-xs uppercase tracking-wide text-slate-500">
+            <tr>
               <th className="px-4 py-3 font-medium">Document</th>
               <th className="px-4 py-3 font-medium">Type</th>
               <th className="px-4 py-3 font-medium">Status</th>
@@ -29,7 +29,7 @@ export function ProcessingHistoryTable({
               <th className="px-4 py-3 font-medium">Processed At</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-slate-100">
+          <tbody>
             {isLoading ? (
               Array.from({ length: 5 }).map((_, index) => (
                 <tr key={index}>
@@ -40,21 +40,21 @@ export function ProcessingHistoryTable({
               ))
             ) : items.length > 0 ? (
               items.map((item) => (
-                <tr key={`${item.documentName}-${item.timestamp}`} className="hover:bg-blue-50/50">
-                  <td className="px-4 py-4 text-sm font-medium text-slate-900">
+                <tr key={`${item.documentName}-${item.timestamp}`}>
+                  <td className="px-4 py-4 text-sm font-medium text-[var(--text)]">
                     {item.documentName}
                   </td>
-                  <td className="px-4 py-4 text-sm capitalize text-slate-600">
+                  <td className="px-4 py-4 text-sm capitalize text-[var(--text-secondary)]">
                     {item.documentType}
                   </td>
-                  <td className="px-4 py-4 text-sm text-slate-600">{item.status}</td>
-                  <td className="px-4 py-4 text-sm text-slate-600">{item.recordsAdded}</td>
-                  <td className="px-4 py-4 text-sm text-slate-600">{item.timestamp}</td>
+                  <td className="px-4 py-4 text-sm text-[var(--text-secondary)]">{item.status}</td>
+                  <td className="mono px-4 py-4 text-sm text-[var(--text-secondary)]">{item.recordsAdded}</td>
+                  <td className="mono px-4 py-4 text-sm text-[var(--text-secondary)]">{item.timestamp}</td>
                 </tr>
               ))
             ) : (
               <tr>
-                <td className="px-4 py-10 text-center text-sm text-slate-500" colSpan={5}>
+                <td className="px-4 py-10 text-center text-sm text-[var(--muted)]" colSpan={5}>
                   No ingestion history available yet.
                 </td>
               </tr>

@@ -4,7 +4,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { ApiError } from "../../../api/client";
 import type { DocumentKind } from "../../../api/documents";
 import { ProcessingHistoryTable } from "../components/ProcessingHistoryTable";
-import { ProcessingSummaryCard } from "../components/ProcessingSummaryCard";
+import { ProcessingSummaryCardRef } from "../components/ProcessingSummaryCardRef";
 import { ProcessingTimeline } from "../components/ProcessingTimeline";
 import { UploadCard } from "../components/UploadCard";
 import { UploadDropzone } from "../components/UploadDropzone";
@@ -35,7 +35,7 @@ const uploadDefinitions: Array<{
     title: "Supplier Document",
     description: "Company and supplier master data",
     icon: "🏭",
-    tintClassName: "bg-blue-50 text-blue-700",
+    tintClassName: "bg-[var(--accent-soft)] text-[var(--accent)]",
     emptyLabel: "Upload supplier PDF",
   },
   {
@@ -99,36 +99,36 @@ export function DocumentIngestionPage() {
   );
 
   return (
-    <div className="min-h-screen">
-      <div className="mx-auto flex w-full max-w-7xl flex-col gap-8 px-6 py-10 lg:px-8">
-        <header className="rounded-[2rem] border border-blue-100/80 bg-white/95 px-8 py-8 shadow-[0_20px_60px_rgba(37,99,235,0.08)]">
+    <div className="page-shell">
+      <div className="flex w-full flex-col gap-8">
+        <header className="page-header px-8 py-8">
           <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
             <div className="max-w-3xl">
-              <p className="text-sm font-semibold uppercase tracking-[0.18em] text-blue-700">
+              <p className="eyebrow text-sm">
                 Document Ingestion
               </p>
-              <h1 className="mt-3 text-3xl font-semibold tracking-tight text-slate-950 sm:text-4xl">
+              <h1 className="mt-3 text-3xl font-semibold tracking-tight text-[var(--text)] sm:text-4xl">
                 Upload and process supplier, ESG, and transaction PDFs
               </h1>
-              <p className="mt-4 text-sm leading-6 text-slate-600 sm:text-base">
+              <p className="mt-4 text-sm leading-6 text-[var(--text-secondary)] sm:text-base">
                 This React flow replaces the Streamlit ingestion page with a cleaner
                 production-ready UI. It registers uploads, sends files to object storage,
                 triggers ingestion, and tracks processing history through backend APIs.
               </p>
             </div>
-            <div className="rounded-3xl border border-blue-100 bg-blue-50/50 px-5 py-4">
-              <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-500">
+            <div className="surface-soft px-5 py-4">
+              <p className="muted-eyebrow">
                 Upload Status
               </p>
-              <p className="mt-2 text-2xl font-semibold text-slate-950">
+              <p className="mono mt-2 text-2xl font-semibold text-[var(--text)]">
                 {Object.values(files).filter(Boolean).length}/3
               </p>
-              <p className="mt-1 text-sm text-slate-500">Documents selected</p>
+              <p className="mt-1 text-sm text-[var(--muted)]">Documents selected</p>
             </div>
           </div>
         </header>
 
-        <section className="grid gap-4 rounded-[2rem] border border-blue-100/80 bg-white/95 p-6 shadow-[0_14px_40px_rgba(37,99,235,0.08)] md:grid-cols-5">
+        <section className="surface-card grid gap-4 p-6 md:grid-cols-5">
           {[
             { title: "Upload", subtitle: "Select PDF files" },
             { title: "Store", subtitle: "Upload to blob storage" },
@@ -137,12 +137,12 @@ export function DocumentIngestionPage() {
             { title: "History", subtitle: "Log ingestion results" },
           ].map((step, index) => (
             <div key={step.title} className="flex items-center gap-4">
-              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-sky-50 text-sm font-semibold text-sky-700">
+              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[var(--primary-soft)] text-sm font-semibold text-[var(--primary)]">
                 {index + 1}
               </div>
               <div>
-                <p className="text-sm font-semibold text-slate-900">{step.title}</p>
-                <p className="text-xs text-slate-500">{step.subtitle}</p>
+                <p className="text-sm font-semibold text-[var(--text)]">{step.title}</p>
+                <p className="text-xs text-[var(--muted)]">{step.subtitle}</p>
               </div>
             </div>
           ))}
@@ -172,18 +172,18 @@ export function DocumentIngestionPage() {
           ))}
         </section>
 
-        <section className="sticky bottom-4 z-10 rounded-[2rem] border border-blue-100/80 bg-white/95 p-5 shadow-[0_24px_60px_rgba(37,99,235,0.12)] backdrop-blur">
+        <section className="surface-card sticky bottom-4 z-10 p-5 backdrop-blur">
           <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
             <div>
-              <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-500">
+              <p className="muted-eyebrow">
                 Pipeline Control
               </p>
-              <p className="mt-2 text-base font-semibold text-slate-900">
+              <p className="mt-2 text-base font-semibold text-[var(--text)]">
                 {isReadyToProcess
                   ? "All required files are attached and ready for processing."
                   : "Attach supplier, ESG, and transaction PDFs to continue."}
               </p>
-              <p className="mt-1 text-sm text-slate-500">
+              <p className="mt-1 text-sm text-[var(--muted)]">
                 The existing upload and ingestion behavior is unchanged.
               </p>
             </div>
@@ -192,7 +192,7 @@ export function DocumentIngestionPage() {
               type="button"
               onClick={() => void handleProcessDocuments()}
               disabled={!isReadyToProcess || startIngestionMutation.isPending}
-              className="inline-flex min-h-12 items-center justify-center rounded-2xl bg-blue-700 px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-blue-800 disabled:cursor-not-allowed disabled:bg-slate-300"
+              className="btn-primary px-6 py-3"
             >
               {startIngestionMutation.isPending ? "Processing..." : "Process Documents"}
             </button>
@@ -206,11 +206,11 @@ export function DocumentIngestionPage() {
           />
 
           {currentJob?.status === "completed" ? (
-            <ProcessingSummaryCard job={currentJob} />
+            <ProcessingSummaryCardRef job={currentJob} />
           ) : (
-            <aside className="rounded-[2rem] border border-blue-100 bg-white/95 p-6 shadow-[0_16px_48px_rgba(37,99,235,0.08)]">
-              <h3 className="text-lg font-semibold text-slate-900">Ready State</h3>
-              <p className="mt-1 text-sm text-slate-500">
+            <aside className="surface-card p-6">
+              <h3 className="text-lg font-semibold text-[var(--text)]">Ready State</h3>
+              <p className="mt-1 text-sm text-[var(--muted)]">
                 All three documents must be selected before the pipeline can start.
               </p>
 
@@ -221,9 +221,9 @@ export function DocumentIngestionPage() {
                   return (
                     <div
                       key={definition.kind}
-                      className="flex items-center justify-between rounded-2xl border border-blue-100 px-4 py-3"
+                      className="surface-subtle flex items-center justify-between px-4 py-3"
                     >
-                      <span className="text-sm font-medium text-slate-700">
+                      <span className="text-sm font-medium text-[var(--text-secondary)]">
                         {definition.title}
                       </span>
                       <span

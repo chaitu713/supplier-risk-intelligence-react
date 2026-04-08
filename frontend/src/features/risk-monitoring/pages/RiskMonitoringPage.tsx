@@ -30,16 +30,16 @@ export function RiskMonitoringPage() {
   const overview = overviewQuery.data;
 
   return (
-    <div className="min-h-screen">
-      <div className="mx-auto flex w-full max-w-7xl flex-col gap-8 px-6 py-10 lg:px-8">
-        <header className="rounded-[2rem] border border-blue-100/80 bg-white/95 px-8 py-8 shadow-[0_20px_60px_rgba(37,99,235,0.08)]">
-          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-blue-700">
+    <div className="page-shell">
+      <div className="flex w-full flex-col gap-8">
+        <header className="page-header px-8 py-8">
+          <p className="eyebrow text-sm">
             Risk Monitoring
           </p>
-          <h1 className="mt-3 text-3xl font-semibold tracking-tight text-slate-950 sm:text-4xl">
+          <h1 className="mt-3 text-3xl font-semibold tracking-tight text-[var(--text)] sm:text-4xl">
             Identify, segment, and investigate supplier risk exposure
           </h1>
-          <p className="mt-4 max-w-3xl text-sm leading-6 text-slate-600 sm:text-base">
+          <p className="mt-4 max-w-3xl text-sm leading-6 text-[var(--text-secondary)] sm:text-base">
             This page mirrors the Streamlit risk view with supplier risk KPIs,
             distribution charts, top-risk suppliers, and due diligence analysis.
           </p>
@@ -74,7 +74,7 @@ export function RiskMonitoringPage() {
             label="Avg Risk Score"
             value={overview ? overview.avgRiskScore.toFixed(2) : "-"}
             subtitle="Fleet average"
-            accentClassName="bg-blue-700"
+            accentClassName="bg-[var(--primary)]"
           />
         </section>
 

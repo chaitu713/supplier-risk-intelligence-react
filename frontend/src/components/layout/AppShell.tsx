@@ -15,71 +15,89 @@ const navItems = [
 
 export function AppShell({ children }: AppShellProps) {
   return (
-    <div className="min-h-screen">
-      <div className="sticky top-0 z-20 border-b border-blue-100/80 bg-white/90 backdrop-blur lg:hidden">
-        <div className="mx-auto flex max-w-7xl gap-2 overflow-x-auto px-4 py-3">
-          {navItems.map((item) => (
-            <NavLink
-              key={item.to}
-              to={item.to}
-              end={item.to === "/"}
-              className={({ isActive }) =>
-                `whitespace-nowrap rounded-full px-4 py-2 text-sm font-medium transition ${
-                  isActive
-                    ? "bg-blue-700 text-white shadow-sm"
-                    : "bg-white text-slate-600 ring-1 ring-blue-100 hover:bg-blue-50/60"
-                }`
-              }
+    <div className="min-h-screen bg-[var(--bg)] text-[var(--text)]">
+      <header
+        className="sticky top-0 z-40 w-full border-b"
+        style={{
+          borderColor: "var(--border)",
+          background: "color-mix(in srgb, var(--bg) 85%, transparent)",
+          backdropFilter: "blur(16px) saturate(1.6)",
+          WebkitBackdropFilter: "blur(16px) saturate(1.6)",
+        }}
+      >
+        <div className="page-wrap flex h-[var(--nav-h)] items-center gap-8">
+          <div className="flex shrink-0 items-center gap-3">
+            <div
+              className="grid h-[34px] w-[34px] place-items-center rounded-[10px] border"
+              style={{
+                background: "var(--primary-soft)",
+                borderColor: "var(--primary-muted)",
+              }}
             >
-              {item.label}
-            </NavLink>
-          ))}
+              <span className="text-sm font-semibold" style={{ color: "var(--primary)" }}>
+                SI
+              </span>
+            </div>
+            <div className="leading-tight">
+              <div className="text-sm font-bold tracking-[-0.025em] text-[var(--text)]">
+                Supplier Intelligence AI
+              </div>
+              <div className="text-[9.5px] font-semibold uppercase tracking-[0.09em] text-[var(--muted)]">
+                Operations Workspace
+              </div>
+            </div>
+          </div>
+
+          <nav className="hidden items-center gap-5 md:flex">
+            {navItems.map((item) => (
+              <NavLink
+                key={item.to}
+                to={item.to}
+                end={item.to === "/"}
+                className={({ isActive }) =>
+                  `nav-link ${isActive ? "nav-link-active" : ""}`.trim()
+                }
+              >
+                {item.label}
+              </NavLink>
+            ))}
+          </nav>
+
+          <div className="ml-auto hidden lg:flex">
+            <div className="surface-soft flex items-center gap-3 px-4 py-2">
+              <div>
+                <div className="text-[9px] font-bold uppercase tracking-[0.1em] text-[var(--muted)]">
+                  Workspace
+                </div>
+                <div className="text-[12.5px] font-medium text-[var(--text-secondary)]">
+                  Consistent supplier, risk, and AI views
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
 
-      <aside className="fixed inset-y-0 left-0 hidden w-80 border-r border-blue-100/70 bg-white/88 px-5 py-6 backdrop-blur lg:block">
-        <div className="rounded-[2rem] border border-blue-200/70 bg-[linear-gradient(135deg,#1d4ed8_0%,#2563eb_52%,#38bdf8_100%)] px-5 py-6 text-white shadow-[0_20px_60px_rgba(37,99,235,0.2)]">
-          <p className="text-xs font-semibold uppercase tracking-[0.24em] text-blue-100">
-            Supplier Intelligence
-          </p>
-          <h1 className="mt-3 text-xl font-semibold leading-tight">
-            Executive Operations Console
-          </h1>
-          <p className="mt-2 text-sm leading-6 text-blue-50/90">
-            A cleaner workspace for document intake, supplier risk reviews, and AI-assisted sourcing analysis.
-          </p>
+        <div className="page-wrap pb-3 pt-2 md:hidden">
+          <nav className="flex items-center gap-4 overflow-x-auto pb-1">
+            {navItems.map((item) => (
+              <NavLink
+                key={item.to}
+                to={item.to}
+                end={item.to === "/"}
+                className={({ isActive }) =>
+                  `nav-link whitespace-nowrap ${isActive ? "nav-link-active" : ""}`.trim()
+                }
+              >
+                {item.label}
+              </NavLink>
+            ))}
+          </nav>
         </div>
+      </header>
 
-        <nav className="mt-8 space-y-2">
-          {navItems.map((item) => (
-            <NavLink
-              key={item.to}
-              to={item.to}
-              end={item.to === "/"}
-              className={({ isActive }) =>
-                `block rounded-2xl px-4 py-3 text-sm font-medium transition ${
-                  isActive
-                    ? "bg-blue-700 text-white shadow-sm"
-                    : "text-slate-600 hover:bg-blue-50/60 hover:text-blue-800 hover:shadow-sm"
-                }`
-              }
-            >
-              {item.label}
-            </NavLink>
-          ))}
-        </nav>
-
-        <div className="mt-8 rounded-3xl border border-blue-100 bg-white px-4 py-5 shadow-sm">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-500">
-            Workspace Focus
-          </p>
-          <p className="mt-3 text-sm leading-6 text-slate-600">
-            Review uploads, launch due diligence faster, and keep AI responses readable enough for decision-making.
-          </p>
-        </div>
-      </aside>
-
-      <main className="lg:pl-80">{children}</main>
+      <main className="page-shell">
+        <div className="page-wrap page-content">{children}</div>
+      </main>
     </div>
   );
 }

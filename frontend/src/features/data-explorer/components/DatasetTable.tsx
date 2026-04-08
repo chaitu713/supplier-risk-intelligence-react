@@ -9,30 +9,27 @@ export function DatasetTable({ records, isLoading }: DatasetTableProps) {
   const columns = records[0] ? Object.keys(records[0]) : [];
 
   return (
-    <section className="rounded-[2rem] border border-blue-100 bg-white/95 p-6 shadow-[0_16px_48px_rgba(37,99,235,0.08)]">
+    <section className="surface-card p-6">
       <div className="mb-5">
-        <h3 className="text-lg font-semibold text-slate-900">Dataset Preview</h3>
-        <p className="mt-1 text-sm text-slate-500">
+        <h3 className="text-lg font-semibold text-[var(--text)]">Dataset Preview</h3>
+        <p className="mt-1 text-sm text-[var(--muted)]">
           Showing the first 100 rows from the selected dataset, matching the current
           Streamlit behavior.
         </p>
       </div>
 
       <div className="overflow-x-auto">
-        <table className="min-w-full divide-y divide-blue-100 text-left">
-          <thead className="bg-blue-50/70">
+        <table className="data-table min-w-full text-left">
+          <thead>
             <tr>
               {columns.map((column) => (
-                <th
-                  key={column}
-                  className="whitespace-nowrap px-4 py-3 text-xs font-semibold uppercase tracking-[0.14em] text-slate-500"
-                >
+                <th key={column} className="whitespace-nowrap px-4 py-3">
                   {column}
                 </th>
               ))}
             </tr>
           </thead>
-          <tbody className="divide-y divide-slate-100">
+          <tbody>
             {isLoading ? (
               Array.from({ length: 8 }).map((_, index) => (
                 <tr key={index}>
@@ -43,11 +40,11 @@ export function DatasetTable({ records, isLoading }: DatasetTableProps) {
               ))
             ) : records.length > 0 ? (
               records.map((record, rowIndex) => (
-                <tr key={rowIndex} className="hover:bg-blue-50/50">
+                <tr key={rowIndex}>
                   {Object.entries(record).map(([column, value]) => (
                     <td
                       key={`${rowIndex}-${column}`}
-                      className="whitespace-nowrap px-4 py-3 text-sm text-slate-700"
+                      className="whitespace-nowrap px-4 py-3 text-sm text-[var(--text-secondary)]"
                     >
                       {formatCellValue(value)}
                     </td>
@@ -57,7 +54,7 @@ export function DatasetTable({ records, isLoading }: DatasetTableProps) {
             ) : (
               <tr>
                 <td
-                  className="px-4 py-10 text-center text-sm text-slate-500"
+                  className="px-4 py-10 text-center text-sm text-[var(--muted)]"
                   colSpan={Math.max(columns.length, 1)}
                 >
                   No records found for the selected dataset.

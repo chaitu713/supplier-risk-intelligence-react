@@ -40,25 +40,25 @@ export function SupplierAdvisorAIPage() {
   );
 
   return (
-    <div className="min-h-screen">
-      <div className="mx-auto flex w-full max-w-7xl flex-col gap-8 px-6 py-10 lg:px-8">
-        <header className="rounded-[2rem] border border-blue-100/80 bg-white/95 px-8 py-8 shadow-[0_20px_60px_rgba(37,99,235,0.08)]">
-          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-blue-700">
+    <div className="page-shell">
+      <div className="flex w-full flex-col gap-8">
+        <header className="page-header px-8 py-8">
+          <p className="eyebrow text-sm">
             Supplier Advisor AI
           </p>
-          <h1 className="mt-3 text-3xl font-semibold tracking-tight text-slate-950 sm:text-4xl">
+          <h1 className="mt-3 text-3xl font-semibold tracking-tight text-[var(--text)] sm:text-4xl">
             AI-powered guidance across supplier risk, ESG, and performance
           </h1>
-          <p className="mt-4 max-w-3xl text-sm leading-6 text-slate-600 sm:text-base">
+          <p className="mt-4 max-w-3xl text-sm leading-6 text-[var(--text-secondary)] sm:text-base">
             This page mirrors the Streamlit advisor chat with example prompts,
             session-based message history, and backend-powered supplier analysis.
           </p>
 
           <div className="mt-6 flex flex-wrap items-center gap-3">
-            <span className="rounded-full bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-700 ring-1 ring-emerald-100">
+            <span className="tag tag-primary px-3 py-1 text-xs font-semibold">
               {sessionId ? "Session active" : "Initializing session"}
             </span>
-            <span className="rounded-full bg-blue-50 px-3 py-1 text-xs font-medium text-blue-700 ring-1 ring-blue-100">
+            <span className="tag tag-accent px-3 py-1 text-xs font-medium">
               {messages.length} message{messages.length === 1 ? "" : "s"}
             </span>
           </div>
@@ -71,14 +71,14 @@ export function SupplierAdvisorAIPage() {
         ) : null}
 
         <section className="grid gap-6 xl:grid-cols-[0.8fr_1.4fr]">
-          <aside className="rounded-[2rem] border border-blue-100/80 bg-white/95 p-6 shadow-[0_16px_48px_rgba(37,99,235,0.08)]">
-            <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-500">
+          <aside className="surface-card p-6">
+            <p className="muted-eyebrow">
               Suggested Prompts
             </p>
-            <h2 className="mt-2 text-xl font-semibold text-slate-950">
+            <h2 className="mt-2 text-xl font-semibold text-[var(--text)]">
               Ask targeted sourcing questions
             </h2>
-            <p className="mt-2 text-sm leading-6 text-slate-500">
+            <p className="mt-2 text-sm leading-6 text-[var(--muted)]">
               Use the quick prompts below or write your own question in the composer.
             </p>
 
@@ -86,41 +86,41 @@ export function SupplierAdvisorAIPage() {
               <PromptSuggestions onSelect={(prompt) => void handleSend(prompt)} />
             </div>
 
-            <div className="mt-6 rounded-3xl border border-blue-100 bg-blue-50/50 p-4">
-              <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-500">
+            <div className="surface-soft mt-6 p-4">
+              <p className="muted-eyebrow">
                 Best Use
               </p>
-              <p className="mt-3 text-sm leading-6 text-slate-600">
+              <p className="mt-3 text-sm leading-6 text-[var(--text-secondary)]">
                 Ask for supplier comparisons, geographic concentration risk, ESG concerns, or alternatives for low-risk sourcing.
               </p>
             </div>
           </aside>
 
           <div className="space-y-5">
-            <section className="rounded-[2rem] border border-blue-100/80 bg-white/95 p-6 shadow-[0_16px_48px_rgba(37,99,235,0.08)]">
+            <section className="surface-card p-6">
               <div className="flex items-start justify-between gap-4">
                 <div>
-                  <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-500">
+                  <p className="muted-eyebrow">
                     Conversation
                   </p>
-                  <h2 className="mt-2 text-xl font-semibold text-slate-950">
+                  <h2 className="mt-2 text-xl font-semibold text-[var(--text)]">
                     Supplier analysis workspace
                   </h2>
                 </div>
-                <span className="rounded-full bg-blue-50 px-3 py-1 text-xs font-medium text-blue-700 ring-1 ring-blue-100">
+                <span className="tag tag-primary px-3 py-1 text-xs font-medium">
                   {sendMessageMutation.isPending ? "Generating reply" : "Live"}
                 </span>
               </div>
 
               {messages.length === 0 ? (
-                <div className="mt-6 rounded-[1.75rem] border border-dashed border-blue-200 bg-blue-50/50 px-6 py-14 text-center">
-                  <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-3xl bg-blue-700 text-2xl text-white shadow-lg">
+                <div className="empty-state mt-6 px-6 py-14 text-center">
+                  <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-3xl bg-[var(--primary)] text-2xl text-white shadow-lg">
                     AI
                   </div>
-                  <h3 className="mt-5 text-xl font-semibold text-slate-900">
+                  <h3 className="mt-5 text-xl font-semibold text-[var(--text)]">
                     Supplier Advisor AI Ready
                   </h3>
-                  <p className="mx-auto mt-3 max-w-md text-sm leading-6 text-slate-500">
+                  <p className="mx-auto mt-3 max-w-md text-sm leading-6 text-[var(--muted)]">
                     Ask anything about supplier risk, ESG performance, or operational insights.
                   </p>
                 </div>

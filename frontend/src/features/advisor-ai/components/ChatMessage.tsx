@@ -12,15 +12,15 @@ export function ChatMessage({ message }: ChatMessageProps) {
   return (
     <div className={`flex gap-3 ${isUser ? "justify-end" : "justify-start"}`}>
       {!isUser ? (
-        <div className="mt-1 flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-blue-700 text-xs font-semibold text-white shadow-sm">
+        <div className="mt-1 flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-[var(--primary)] text-xs font-semibold text-white shadow-sm">
           AI
         </div>
       ) : null}
       <div
         className={`max-w-3xl rounded-[1.75rem] px-5 py-4 text-sm shadow-sm ${
           isUser
-            ? "bg-blue-700 text-white"
-            : "border border-blue-100/90 bg-white text-slate-700"
+            ? "bg-[var(--primary)] text-white"
+            : "border border-[color:var(--border)] bg-white text-[var(--text-secondary)]"
         }`}
       >
         <div className="mb-3 flex items-center justify-between gap-4">
@@ -42,7 +42,7 @@ export function ChatMessage({ message }: ChatMessageProps) {
         )}
       </div>
       {isUser ? (
-        <div className="mt-1 flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-blue-100 text-xs font-semibold text-blue-800 shadow-sm">
+        <div className="mt-1 flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-[var(--surface-2)] text-xs font-semibold text-[var(--primary)] shadow-sm">
           You
         </div>
       ) : null}

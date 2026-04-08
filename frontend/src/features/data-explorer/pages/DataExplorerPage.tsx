@@ -22,18 +22,18 @@ export function DataExplorerPage() {
   const errorMessage = getErrorMessage(datasetQuery.error);
 
   return (
-    <div className="min-h-screen">
-      <div className="mx-auto flex w-full max-w-7xl flex-col gap-8 px-6 py-10 lg:px-8">
-        <header className="rounded-[2rem] border border-blue-100/80 bg-white/95 px-8 py-8 shadow-[0_20px_60px_rgba(37,99,235,0.08)]">
-          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-blue-700">
+    <div className="page-shell">
+      <div className="flex w-full flex-col gap-8">
+        <header className="page-header px-8 py-8">
+          <p className="eyebrow text-sm">
             Data Explorer
           </p>
           <div className="mt-3 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
             <div className="max-w-3xl">
-              <h1 className="text-3xl font-semibold tracking-tight text-slate-950 sm:text-4xl">
+              <h1 className="text-3xl font-semibold tracking-tight text-[var(--text)] sm:text-4xl">
                 Browse raw supplier, ESG, and transaction datasets
               </h1>
-              <p className="mt-4 text-sm leading-6 text-slate-600 sm:text-base">
+              <p className="mt-4 text-sm leading-6 text-[var(--text-secondary)] sm:text-base">
                 This page mirrors the current Streamlit Data Explorer: choose a dataset,
                 inspect quick stats, and review the table preview returned by the backend.
               </p>
@@ -43,17 +43,17 @@ export function DataExplorerPage() {
           </div>
         </header>
 
-        <section className="rounded-[2rem] border border-blue-100/80 bg-white/95 p-6 shadow-[0_16px_48px_rgba(37,99,235,0.08)]">
+        <section className="surface-card p-6">
           <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
             <div>
-              <h2 className="text-lg font-semibold text-slate-900">
+              <h2 className="text-lg font-semibold text-[var(--text)]">
                 {datasetLabel(dataset)}
               </h2>
-              <p className="mt-1 text-sm text-slate-500">
+              <p className="mt-1 text-sm text-[var(--muted)]">
                 {datasetDescriptions[dataset]}
               </p>
             </div>
-            <span className="inline-flex rounded-full bg-blue-50 px-3 py-1 text-xs font-medium uppercase tracking-wide text-blue-700 ring-1 ring-blue-100">
+            <span className="tag tag-primary px-3 py-1 text-xs font-medium uppercase tracking-wide">
               Backend-powered
             </span>
           </div>

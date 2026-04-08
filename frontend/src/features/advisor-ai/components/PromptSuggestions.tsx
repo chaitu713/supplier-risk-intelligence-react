@@ -16,7 +16,7 @@ export function PromptSuggestions({ onSelect }: PromptSuggestionsProps) {
           key={prompt}
           type="button"
           onClick={() => onSelect(prompt)}
-          className="rounded-2xl border border-blue-100 bg-white px-4 py-4 text-left text-sm font-medium text-slate-700 shadow-sm transition hover:border-blue-200 hover:bg-blue-50 hover:text-blue-800"
+          className="surface-subtle px-4 py-4 text-left text-sm font-medium text-[var(--text-secondary)] shadow-sm transition hover:text-[var(--primary)]"
         >
           {prompt}
         </button>

@@ -20,16 +20,16 @@ export function OverviewDashboardPage() {
   const metrics = metricsQuery.data;
 
   return (
-    <div className="min-h-screen">
-      <div className="mx-auto flex w-full max-w-7xl flex-col gap-8 px-6 py-10 lg:px-8">
-        <header className="rounded-[2rem] border border-blue-100 bg-white/95 px-8 py-8 shadow-[0_20px_60px_rgba(37,99,235,0.08)]">
-          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-blue-700">
+    <div className="page-shell">
+      <div className="flex w-full flex-col gap-8">
+        <header className="page-header px-8 py-8">
+          <p className="eyebrow text-sm">
             Overview Dashboard
           </p>
-          <h1 className="mt-3 text-3xl font-semibold tracking-tight text-slate-950 sm:text-4xl">
+          <h1 className="mt-3 text-3xl font-semibold tracking-tight text-[var(--text)] sm:text-4xl">
             High-level supplier metrics and distribution insights
           </h1>
-          <p className="mt-4 max-w-3xl text-sm leading-6 text-slate-600 sm:text-base">
+          <p className="mt-4 max-w-3xl text-sm leading-6 text-[var(--text-secondary)] sm:text-base">
             This page mirrors the Streamlit overview dashboard with backend-powered KPI
             cards and chart sections for supplier geography and ESG score spread.
           </p>
@@ -46,31 +46,31 @@ export function OverviewDashboardPage() {
             label="Total Suppliers"
             value={metrics ? metrics.totalSuppliers.toLocaleString() : "-"}
             subtitle="Active in network"
-            accentClassName="bg-blue-700"
+            accentClassName="bg-[var(--primary)]"
           />
           <KpiCard
             label="Avg ESG Score"
             value={metrics ? metrics.avgEsgScore.toFixed(1) : "-"}
             subtitle="Environmental and social"
-            accentClassName="bg-sky-500"
+            accentClassName="bg-[var(--accent)]"
           />
           <KpiCard
             label="Avg Delay"
             value={metrics ? `${metrics.avgDelayDays.toFixed(1)}d` : "-"}
             subtitle="Delivery performance"
-            accentClassName="bg-blue-500"
+            accentClassName="bg-[var(--primary)]"
           />
           <KpiCard
             label="Avg Defect Rate"
             value={metrics ? `${metrics.avgDefectRatePct.toFixed(2)}%` : "-"}
             subtitle="Quality metric"
-            accentClassName="bg-indigo-500"
+            accentClassName="bg-[var(--border-strong)]"
           />
           <KpiCard
             label="High Risk"
             value={metrics ? metrics.highRiskCount.toLocaleString() : "-"}
             subtitle="Require attention"
-            accentClassName="bg-blue-800"
+            accentClassName="bg-[var(--primary-hover)]"
           />
         </section>
 

@@ -16,7 +16,10 @@ export function DatasetSegmentedControl({
   onChange,
 }: DatasetSegmentedControlProps) {
   return (
-    <div className="inline-flex rounded-2xl border border-blue-100/80 bg-white/95 p-1 shadow-[0_10px_24px_rgba(37,99,235,0.08)]">
+    <div
+      className="inline-flex rounded-2xl border bg-[var(--surface)] p-1 shadow-sm"
+      style={{ borderColor: "var(--border)" }}
+    >
       {options.map((option) => {
         const active = option.value === value;
 
@@ -27,8 +30,8 @@ export function DatasetSegmentedControl({
             onClick={() => onChange(option.value)}
             className={`rounded-xl px-4 py-2 text-sm font-medium transition ${
               active
-                ? "bg-white text-blue-700 shadow-sm ring-1 ring-blue-100"
-                : "text-slate-500 hover:text-blue-700"
+                ? "bg-white text-[var(--primary)] shadow-sm"
+                : "text-[var(--muted)] hover:text-[var(--primary)]"
             }`}
           >
             {option.label}

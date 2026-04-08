@@ -29,8 +29,8 @@ export function PlotlyChart({
           paper_bgcolor: "rgba(0,0,0,0)",
           plot_bgcolor: "rgba(0,0,0,0)",
           font: {
-            family: "Segoe UI, Inter, sans-serif",
-            color: "#475569",
+            family: "Outfit, system-ui, sans-serif",
+            color: "#384534",
           },
           margin: { l: 32, r: 16, t: 12, b: 36 },
           ...layout,
